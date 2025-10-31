@@ -1,163 +1,109 @@
-// NishMetric Full React Setup (Tailwind + Charts + Animation)
-
-import React, { useState, useEffect } from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-} from "recharts";
+import React from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Mail, MessageCircle, Github, Linkedin } from "lucide-react";
-import Logo from "./assets/nishmetric-logo.png";
+import { Mail, Linkedin, Globe } from "lucide-react";
 
-const CONTACT_EMAIL = "nishkarsh.agnihotri11@gmail.com";
-const WHATSAPP =
-  "https://wa.me/918954242748?text=Hi%20Nishkarsh%20I’m%20interested%20in%20your%20data%20analytics%20services.";
-const TAGLINE = "Turning data into intelligent decisions.";
-
-const NAV_ITEMS = [
-  { id: "projects", label: "Projects" },
-  { id: "about", label: "About" },
-  { id: "contact", label: "Contact" },
-];
-
-const lineData = [
-  { name: "Jan", value: 300 },
-  { name: "Feb", value: 700 },
-  { name: "Mar", value: 900 },
-  { name: "Apr", value: 850 },
-  { name: "May", value: 1100 },
-  { name: "Jun", value: 1250 },
-];
-
-const barData = [
-  { name: "A", uv: 2400 },
-  { name: "B", uv: 1398 },
-  { name: "C", uv: 9800 },
-  { name: "D", uv: 3908 },
-];
-
-export default function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
+const App = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-indigo-500 to-blue-600 text-white flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-indigo-50 text-gray-900">
       {/* Navbar */}
-      <header className="flex justify-between items-center p-5">
-        <div className="flex items-center gap-3">
-          <img src={Logo} alt="NishMetric" className="h-10 w-10 rounded-full" />
-          <h1 className="font-bold text-2xl">NishMetric</h1>
-        </div>
-        <nav className="hidden md:flex gap-6">
-          {NAV_ITEMS.map((item) => (
-            <a key={item.id} href={`#${item.id}`} className="hover:underline">
-              {item.label}
-            </a>
-          ))}
+      <header className="flex justify-between items-center px-10 py-5 bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-50">
+        <h1 className="text-3xl font-extrabold text-indigo-700">NishMetric</h1>
+        <nav className="space-x-8 text-gray-700 font-medium">
+          <a href="#home" className="hover:text-indigo-600 transition">Home</a>
+          <a href="#about" className="hover:text-indigo-600 transition">About</a>
+          <a href="#projects" className="hover:text-indigo-600 transition">Projects</a>
+          <a href="#contact" className="hover:text-indigo-600 transition">Contact</a>
         </nav>
-        <button
-          className="md:hidden"
-          onClick={() => setMenuOpen((prev) => !prev)}
-        >
-          {menuOpen ? <X /> : <Menu />}
-        </button>
       </header>
 
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden flex flex-col gap-4 items-center bg-blue-700 py-4"
-        >
-          {NAV_ITEMS.map((item) => (
-            <a key={item.id} href={`#${item.id}`}>
-              {item.label}
-            </a>
-          ))}
-        </motion.div>
-      )}
-
       {/* Hero Section */}
-      <main className="flex flex-col items-center justify-center flex-1 text-center p-10">
+      <section id="home" className="flex flex-col items-center justify-center text-center py-28 px-6">
         <motion.h2
-          initial={{ opacity: 0, y: -20 }}
+          className="text-6xl font-bold text-indigo-700 mb-4 leading-tight"
+          initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-bold mb-4"
+          transition={{ duration: 1 }}
         >
-          {TAGLINE}
+          Empowering Businesses with <br /> Intelligent Data Solutions
         </motion.h2>
-        <p className="text-lg mb-6 max-w-lg">
-          Empowering businesses with insightful data visualization and
-          analytics.
+        <motion.p
+          className="text-gray-600 max-w-2xl mb-10 text-lg"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          We at <span className="font-semibold text-indigo-600">NishMetric</span> believe in transforming raw data
+          into powerful insights. Your growth — powered by analytics.
+        </motion.p>
+        <motion.button
+          className="bg-indigo-600 text-white px-8 py-3 rounded-xl hover:bg-indigo-700 transition-all"
+          whileHover={{ scale: 1.05 }}
+        >
+          Explore Our Work
+        </motion.button>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 px-10 bg-white text-center">
+        <h3 className="text-4xl font-bold text-indigo-700 mb-6">About Us</h3>
+        <p className="text-gray-600 max-w-4xl mx-auto text-lg leading-relaxed">
+          NishMetric is a next-generation analytics company that helps organizations harness the
+          power of data. From visualization to automation, we build scalable insights systems
+          designed to optimize business performance and drive measurable results.
         </p>
-        <div className="flex gap-4">
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noreferrer"
-            className="bg-green-500 px-5 py-2 rounded-lg hover:bg-green-600 transition"
-          >
-            <MessageCircle className="inline mr-2" /> Chat on WhatsApp
-          </a>
-          <a
-            href={`mailto:${CONTACT_EMAIL}`}
-            className="bg-white text-blue-700 px-5 py-2 rounded-lg hover:bg-gray-200 transition"
-          >
-            <Mail className="inline mr-2" /> Email Me
-          </a>
-        </div>
-      </main>
+      </section>
 
-      {/* Charts Section */}
-      <section className="p-10 grid md:grid-cols-2 gap-10 bg-white text-blue-700 rounded-t-3xl">
-        <div>
-          <h3 className="text-xl font-semibold mb-3">Performance Over Time</h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={lineData}>
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Line
-                type="monotone"
-                dataKey="value"
-                stroke="#3b82f6"
-                strokeWidth={3}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+      {/* Projects Section */}
+      <section id="projects" className="py-20 px-10 bg-indigo-50 text-center">
+        <h3 className="text-4xl font-bold text-indigo-700 mb-10">Our Projects</h3>
+        <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+          {[
+            {
+              title: "Sales Intelligence Dashboard",
+              desc: "A dynamic sales analytics platform providing insights into team performance, targets, and revenue growth."
+            },
+            {
+              title: "Customer Insights System",
+              desc: "AI-powered insights to help businesses understand behavior, predict churn, and improve retention."
+            },
+            {
+              title: "Performance Metrics Hub",
+              desc: "A unified dashboard visualizing KPIs across departments for better decision-making."
+            },
+          ].map((project, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05 }}
+              className="bg-white rounded-2xl shadow-md p-8 border border-gray-100 transition-all"
+            >
+              <h4 className="text-2xl font-semibold mb-3 text-indigo-600">{project.title}</h4>
+              <p className="text-gray-600 text-base">{project.desc}</p>
+            </motion.div>
+          ))}
         </div>
+      </section>
 
-        <div>
-          <h3 className="text-xl font-semibold mb-3">Project Analytics</h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={barData}>
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Bar dataKey="uv" fill="#2563eb" radius={[6, 6, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+      {/* Contact Section */}
+      <section id="contact" className="py-20 px-10 text-center bg-white">
+        <h3 className="text-4xl font-bold text-indigo-700 mb-6">Get In Touch</h3>
+        <p className="text-gray-600 mb-8 text-lg">
+          Interested in collaborating or learning more about NishMetric? Let’s connect.
+        </p>
+        <div className="flex justify-center gap-8 text-indigo-600 text-3xl">
+          <a href="mailto:nishkarsh.agnihotri11@gmail.com" className="hover:text-indigo-800 transition"><Mail /></a>
+          <a href="https://linkedin.com" target="_blank" className="hover:text-indigo-800 transition"><Linkedin /></a>
+          <a href="#" className="hover:text-indigo-800 transition"><Globe /></a>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-blue-800 py-6 text-center text-sm">
-        <div className="flex justify-center gap-6 mb-2">
-          <a href="https://github.com" target="_blank" rel="noreferrer">
-            <Github />
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer">
-            <Linkedin />
-          </a>
-        </div>
-        <p>© 2025 NishMetric | Designed with 💙 by Nishkarsh Agnihotri</p>
+      <footer className="bg-indigo-700 text-white py-6 text-center">
+        <p className="text-sm">
+          © 2025 <span className="font-semibold">NishMetric</span>. All Rights Reserved.
+        </p>
       </footer>
     </div>
   );
-}
+};
+
+export default App;
